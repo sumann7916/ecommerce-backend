@@ -1,6 +1,7 @@
-import { IsEmail, IsNotEmpty, Length, Matches, Validate } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, Length, Matches, Validate } from "class-validator";
 import { PasswordMatches } from "../validators/password-matches.validator";
 import { IsEmailUnique } from '../validators/is-email-unique.validator';
+import { Role } from "../entity/users.entity";
 
 
 
@@ -28,6 +29,10 @@ export class CreateUserDto{
     @Length(8,24)
     @Validate(PasswordMatches, ['password'])
     confirm: string;
+
+    @IsEnum(Role)
+    @IsNotEmpty()
+    role: Role;
 
 
 }

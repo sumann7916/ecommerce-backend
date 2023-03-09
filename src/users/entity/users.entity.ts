@@ -17,6 +17,9 @@ export class User extends BaseEntity{
     lastName: string;
 
     @Column()
+    role: Role;
+
+    @Column()
     password: string;
 
     @CreateDateColumn()
@@ -25,5 +28,10 @@ export class User extends BaseEntity{
     @UpdateDateColumn()
     updatedAt: Date;
 
+}
 
+export enum Role {
+    Customer = 'customer',
+    Seller = 'seller',
+    Admin = 'admin'
 }
