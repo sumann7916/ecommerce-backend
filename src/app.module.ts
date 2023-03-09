@@ -6,6 +6,7 @@ import { TypeormConfig } from './typeorm.config';
 import { UsersModule } from './users/users.module';
 import { FriendshipModule } from './friendship/friendship.module';
 import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './products/products.module';
 
 
 
@@ -17,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
   UsersModule,
   FriendshipModule,
   AuthModule,
+  ProductsModule,
 
   ],
   controllers: [AppController],

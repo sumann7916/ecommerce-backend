@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsNotEmpty, Length, Matches, Validate } from "class-validator";
+import { IsEmail, IsEnum, IsLatitude, IsLongitude, IsNotEmpty, IsOptional, Length, Matches, Validate } from "class-validator";
 import { PasswordMatches } from "../validators/password-matches.validator";
 import { IsEmailUnique } from '../validators/is-email-unique.validator';
 import { Role } from "../entity/users.entity";
@@ -31,9 +31,23 @@ export class CreateUserDto{
     confirm: string;
 
     @IsEnum(Role)
-    @IsNotEmpty()
+    @IsOptional()
     role: Role;
 
+    @IsOptional()
+    longitude: string;
 
+    @IsOptional()
+    latitude: string;
+
+
+    @IsNotEmpty()
+    country: string;
+
+    @IsNotEmpty()
+    streetAddress: string;
+
+    @IsNotEmpty()
+    city: string;
 }
 

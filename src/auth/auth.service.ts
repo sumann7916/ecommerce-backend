@@ -30,6 +30,7 @@ export class AuthService {
             access_token: this.jwtService.sign({
               email: user.email,
               sub: user.id,
+              role: user.role
             },
             {secret: JWT_SECRET}),
           };

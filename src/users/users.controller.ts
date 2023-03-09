@@ -10,8 +10,6 @@ export class UsersController {
     @Post('/register')
     @UsePipes(new ValidationPipe())
     async doUserRegistration(@Body()payload: CreateUserDto){
-
-        
         return await this.userService.doUserRegistration(payload);
     }
 }
