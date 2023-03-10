@@ -62,9 +62,9 @@ export class ProductsService {
         //   .getMany();
         const offset = (page-1)* limit;
         const query = `
-        SELECT *, ST_Distance(location, ST_SetSRID(ST_Point($2, $1), 4326)) as distance
+        SELECT *, ST_Distance(location::geography, ST_SetSRID(ST_Point($2, $1), 4326)::geography)/1000 as distance_km
         FROM products
-        ORDER BY distance ASC
+        ORDER BY distance_km ASC
         LIMIT $3
         OFFSET $4
       `;

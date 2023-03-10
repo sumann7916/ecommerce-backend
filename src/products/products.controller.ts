@@ -52,10 +52,10 @@ export class ProductsController {
     //const ipAddress = req.socket.remoteAddress;
     //console.log(ipAddress);
 
-          const longitude = 85.323960; //my current long
-        const latitude = 27.717245;  // my current lat
+       const longitude = 85.323960; //my current long
+       const latitude = 27.717245;  // my current lat
 
-    //      const longitude = 84.3542; //Chitwan long
+    //     const longitude = 84.3542; //Chitwan long
     //      const latitude = 27.5291;  // Chitwan lat
 
     //const longitude = 85.3059; //Sanepa long
