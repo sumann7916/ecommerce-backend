@@ -1,5 +1,5 @@
 import { Point } from "geojson";
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from '../../users/entity/users.entity';
 
 @Entity("products")
@@ -27,6 +27,12 @@ export class Product extends BaseEntity {
         srid: 4326,
       })
       location: Point;
+
+      @CreateDateColumn()
+      createdAt: Date
+
+      @UpdateDateColumn()
+      updatedAt: Date
 
     @ManyToOne(()=> User, user=> user.products)
     @JoinColumn({name: "seller"})

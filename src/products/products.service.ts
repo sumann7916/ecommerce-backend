@@ -30,11 +30,24 @@ export class ProductsService {
         })
     }
 
-    async getProducts(): Promise <Product[]> {
-        return this.productRepository.find();
+    async getProducts(page:number, limit: number): Promise <any> {
+      const offset = (page - 1) * limit;
+      const products = this.productRepository.find({
+        order: { createdAt: 'DESC' },
+        skip: offset,
+        take: limit,
+      });
+      const productCount = await this.productRepository.count();
+      const lastPage = Math.ceil(productCount / limit);
+
+      return {
+        products,
+        page,
+        lastPage
+      };
     }
 
-    async getNearestProducts(latitude: number, longitude: number): Promise<Product[]> {
+    async getNearestProducts(latitude: number, longitude: number, page: number, limit: number): Promise<any> {
 
         //Not working
         // const point: Point = {
@@ -47,13 +60,22 @@ export class ProductsService {
         //   .setParameter('point', JSON.stringify(point))
         //   .orderBy('distance')
         //   .getMany();
+        const offset = (page-1)* limit;
         const query = `
         SELECT *, ST_Distance(location, ST_SetSRID(ST_Point($2, $1), 4326)) as distance
         FROM products
         ORDER BY distance ASC
+        LIMIT $3
+        OFFSET $4
       `;
-      const nearestProducts = await this.productRepository.query(query, [longitude, latitude]);
+      const productCount = await this.productRepository.count()
+      const lastPage = Math.ceil(productCount/limit)
+      const nearestProducts = await this.productRepository.query(query, [longitude, latitude, limit, offset]);
       
-      return nearestProducts;
+      return {
+        nearestProducts,
+        page,
+        lastPage
+    };
       }
 }
